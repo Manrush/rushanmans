@@ -97,6 +97,8 @@
   // URL веб-приложения Apps Script (Развернуть → Веб-приложение), оканчивается на /exec
   var GAS_URL = "https://script.google.com/macros/s/AKfycbyxHpLsNrOroiOpkucp_x7esAf7Oe8Oct006-EQsGY_yxr_P7rmIfX5Nk1b3nMnQx7PJA/exec";
 
+  trackForm(document.getElementById("contact-form"), "contact");
+
   document.getElementById("contact-form").addEventListener("submit", function (e) {
     e.preventDefault();
     var form = this;
