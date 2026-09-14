@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rushanmans — портфолио и блог</title>
+<meta name="description" content="Rushanmans: статьи о коде и алгоритмах, портфолио проектов, парсинг данных.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- ===================================================================
+     Счётчики веб-аналитики (Яндекс.Метрика / Google Analytics 4)
+     Раскомментировать и подставить реальные ID после регистрации сайта:
+       - Яндекс.Метрика: https://metrika.yandex.ru  -> замените YY_COUNTER_ID
+       - GA4:            https://analytics.google.com -> замените G-XXXXXXXXXX
+     =================================================================== -->
+<!--
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(YY_COUNTER_ID, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/YY_COUNTER_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="index.html" class="logo">RUSHAN<span>MANS</span></a>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="blog.html">Блог</a></li>
+      <li><a href="portfolio.html">Портфолио</a></li>
+      <li><a href="contact.html">Контакты</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>RUSHANMANS 👋<br>Разбираю код и <span class="accent">пишу об этом</span>.</h1>
+    <p class="lead">Статьи о структурах данных, алгоритмах и парсинге веб-данных, плюс портфолио пет-проектов. Сайт сделан в рамках лабораторной работы по веб-аналитике — ниже подключены счётчики посещаемости.</p>
+    <div class="btn-row">
+      <a href="blog.html" class="btn">Читать блог</a>
+      <a href="portfolio.html" class="btn secondary">Смотреть портфолио</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>Последние статьи</h2>
+      <a href="blog.html">Все статьи →</a>
+    </div>
+    <div class="card-stack">
+      <div class="card">
+        <span class="tag">Парсинг</span>
+        <h3><a href="articles/parsing-internships.html">Парсер вакансий стажировок на Python</a></h3>
+        <p>Собираем список стажировок с сайта вакансий: requests + BeautifulSoup, сохранение в CSV и немного pandas для анализа.</p>
+        <div class="meta">12 мин чтения</div>
+      </div>
+      <div class="card">
+        <span class="tag">Алгоритмы</span>
+        <h3><a href="articles/dijkstra-explained.html">Алгоритм Дейкстры на пальцах</a></h3>
+        <p>Разбор задачи поиска кратчайшего пути во взвешенном графе: идея, реализация на Python, сложность и типичные ошибки.</p>
+        <div class="meta">9 мин чтения</div>
+      </div>
+      <div class="card">
+        <span class="tag">Базы данных</span>
+        <h3><a href="articles/sql-n-plus-one.html">Проблема N+1 запросов и как её лечить</a></h3>
+        <p>Почему ORM незаметно генерирует сотни лишних SQL-запросов и как это увидеть и исправить с помощью eager loading.</p>
+        <div class="meta">7 мин чтения</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>Портфолио</h2>
+      <a href="portfolio.html">Все проекты →</a>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Парсер стажировок</h3>
+        <p>Скрипт на Python, который собирает актуальные стажировки с job-сайтов и складывает их в таблицу с фильтрами.</p>
+        <div class="stack">
+          <span class="chip">Python</span><span class="chip">BeautifulSoup</span><span class="chip">pandas</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Этот сайт</h3>
+        <p>Личный сайт-портфолио на чистом HTML/CSS/JS, сделан для лабораторной работы по веб-аналитике.</p>
+        <div class="stack">
+          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Трекер задач</h3>
+        <p>Небольшое SPA-приложение для списка дел с сохранением в localStorage и фильтрацией по статусу.</p>
+        <div class="stack">
+          <span class="chip">JavaScript</span><span class="chip">LocalStorage</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <span>© 2026 Rushanmans</span>
+  <span><a href="contact.html">Связаться со мной</a></span>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

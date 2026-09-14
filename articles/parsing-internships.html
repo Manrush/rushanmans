@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Парсер вакансий стажировок на Python — Rushanmans</title>
+<meta name="description" content="Разбор кода парсера стажировок: requests, BeautifulSoup, pandas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<!-- Счётчики веб-аналитики: см. index.html — подставить реальные ID перед запуском -->
+<!--
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(YY_COUNTER_ID, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/YY_COUNTER_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="../index.html" class="logo">RUSHAN<span>MANS</span></a>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Главная</a></li>
+      <li><a href="../about.html">Обо мне</a></li>
+      <li><a href="../blog.html">Блог</a></li>
+      <li><a href="../portfolio.html">Портфолио</a></li>
+      <li><a href="../contact.html">Контакты</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <div class="article-header">
+    <span class="tag">Парсинг</span>
+    <h1>Парсер вакансий стажировок на Python</h1>
+    <div class="meta">12 мин чтения · Python, requests, BeautifulSoup, pandas</div>
+  </div>
+
+  <article class="content">
+    <p>Задача: собрать список актуальных стажировок с сайта вакансий, оставить только нужные поля (название, компания, город, ссылка) и сохранить результат в таблицу, с которой удобно работать дальше — фильтровать, сортировать, считать статистику.</p>
+
+    <h2>1. Получаем HTML страницы</h2>
+    <p>Для запросов используем <code>requests</code>, а чтобы сайт не банил нас как бота — подставляем заголовок <code>User-Agent</code> и делаем паузу между запросами.</p>
+    <pre><code>import time
+import requests
+from bs4 import BeautifulSoup
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+}
+
+def get_page(url: str) -> BeautifulSoup:
+    response = requests.get(url, headers=HEADERS, timeout=10)
+    response.raise_for_status()
+    return BeautifulSoup(response.text, "html.parser")
+</code></pre>
+
+    <h2>2. Разбираем список вакансий</h2>
+    <p>На странице поиска карточки вакансий обычно лежат в повторяющихся блоках с одинаковым классом. Находим их все и вытаскиваем нужные поля через CSS-селекторы.</p>
+    <pre><code>def parse_vacancies(soup: BeautifulSoup) -> list[dict]:
+    vacancies = []
+    cards = soup.select("div.vacancy-card")
+
+    for card in cards:
+        title_tag = card.select_one("a.vacancy-title")
+        company_tag = card.select_one("span.company-name")
+        city_tag = card.select_one("span.city")
+
+        if not title_tag:
+            continue
+
+        vacancies.append({
+            "title": title_tag.get_text(strip=True),
+            "company": company_tag.get_text(strip=True) if company_tag else "—",
+            "city": city_tag.get_text(strip=True) if city_tag else "—",
+            "url": title_tag.get("href"),
+        })
+
+    return vacancies
+</code></pre>
+
+    <div class="callout">
+      Названия классов (<code>vacancy-card</code>, <code>vacancy-title</code> и т.д.) — условные: у каждого сайта своя вёрстка, реальные селекторы нужно смотреть через «Инструменты разработчика» → вкладка Elements.
+    </div>
+
+    <h2>3. Проходим несколько страниц пагинации</h2>
+    <pre><code>def collect_all(base_url: str, pages: int = 5) -> list[dict]:
+    all_vacancies = []
+    for page in range(1, pages + 1):
+        soup = get_page(f"{base_url}?page={page}")
+        all_vacancies.extend(parse_vacancies(soup))
+        time.sleep(1)  # пауза, чтобы не нагружать сайт запросами
+    return all_vacancies
+</code></pre>
+
+    <h2>4. Сохраняем и анализируем через pandas</h2>
+    <p>Когда данные собраны, удобно сразу превратить список словарей в таблицу — так проще искать дубликаты, фильтровать по городу или считать, у каких компаний больше всего открытых стажировок.</p>
+    <pre><code>import pandas as pd
+
+data = collect_all("https://example-jobs.ru/internships")
+df = pd.DataFrame(data)
+
+df = df.drop_duplicates(subset="url")
+df.to_csv("internships.csv", index=False, encoding="utf-8-sig")
+
+print(df["company"].value_counts().head(10))
+</code></pre>
+
+    <h2>Итог</h2>
+    <p>Получили конвейер из четырёх шагов: скачать страницу → распарсить карточки → пройтись по пагинации → сложить в CSV. Дальше это можно превратить в регулярную задачу (cron / планировщик задач), которая раз в день обновляет таблицу свежих стажировок.</p>
+
+    <p><strong>Что можно улучшить:</strong></p>
+    <ul>
+      <li>Добавить повторные попытки запроса при сетевых ошибках.</li>
+      <li>Кэшировать уже просмотренные вакансии, чтобы не парсить повторно.</li>
+      <li>Вынести селекторы в конфиг — так парсер проще адаптировать под другой сайт.</li>
+    </ul>
+
+    <a class="back-link" href="../blog.html">← Ко всем статьям</a>
+  </article>
+
+</main>
+
+<footer class="site-footer wrap">
+  <span>© 2026 Rushanmans</span>
+  <span><a href="../contact.html">Связаться со мной</a></span>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

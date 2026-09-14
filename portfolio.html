@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Портфолио — Rushanmans</title>
+<meta name="description" content="Проекты: парсеры, пет-приложения, эксперименты с данными.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Счётчики веб-аналитики: см. index.html — подставить реальные ID перед запуском -->
+<!--
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(YY_COUNTER_ID, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/YY_COUNTER_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="index.html" class="logo">RUSHAN<span>MANS</span></a>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="blog.html">Блог</a></li>
+      <li><a href="portfolio.html">Портфолио</a></li>
+      <li><a href="contact.html">Контакты</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Портфолио</h1>
+    <p class="lead">Несколько проектов, которые показывают, как я работаю с кодом и данными.</p>
+  </section>
+
+  <section>
+    <div class="grid">
+
+      <div class="card">
+        <span class="tag">Python · Парсинг</span>
+        <h3>Парсер стажировок</h3>
+        <p>Скрипт собирает объявления о стажировках с job-сайта: запросы с задержкой, разбор HTML через BeautifulSoup, очистка данных и экспорт в CSV. Разбор кода — в статье
+          <a href="articles/parsing-internships.html">«Парсер вакансий стажировок на Python»</a>.</p>
+        <div class="stack">
+          <span class="chip">Python</span><span class="chip">requests</span><span class="chip">BeautifulSoup</span><span class="chip">pandas</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Алгоритмы</span>
+        <h3>Визуализация алгоритма Дейкстры</h3>
+        <p>Консольная реализация поиска кратчайшего пути во взвешенном графе с пошаговым выводом состояния очереди с приоритетом. Полный разбор — в статье
+          <a href="articles/dijkstra-explained.html">«Алгоритм Дейкстры на пальцах»</a>.</p>
+        <div class="stack">
+          <span class="chip">Python</span><span class="chip">heapq</span><span class="chip">Графы</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag">HTML/CSS/JS</span>
+        <h3>Этот сайт-портфолио</h3>
+        <p>Многостраничный статический сайт: блог, портфолио, контакты — сделан как лабораторная работа по веб-аналитике, с подключением счётчиков посещаемости.</p>
+        <div class="stack">
+          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Vanilla JS</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag">JavaScript</span>
+        <h3>Трекер задач</h3>
+        <p>Небольшое SPA для списка дел: добавление, отметка выполненных, фильтр по статусу, сохранение состояния в localStorage без бэкенда.</p>
+        <div class="stack">
+          <span class="chip">JavaScript</span><span class="chip">LocalStorage</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag">SQL</span>
+        <h3>Разбор проблемы N+1</h3>
+        <p>Мини-пример на Django ORM, который показывает проблему N+1 запросов и её решение через <code>select_related</code>/<code>prefetch_related</code>. Подробнее — в статье
+          <a href="articles/sql-n-plus-one.html">«Проблема N+1 запросов»</a>.</p>
+        <div class="stack">
+          <span class="chip">SQL</span><span class="chip">Django ORM</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <span>© 2026 Rushanmans</span>
+  <span><a href="contact.html">Связаться со мной</a></span>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

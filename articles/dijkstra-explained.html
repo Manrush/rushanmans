@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Алгоритм Дейкстры на пальцах — Rushanmans</title>
+<meta name="description" content="Разбор алгоритма Дейкстры: идея, реализация на Python, сложность.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<!-- Счётчики веб-аналитики: см. index.html — подставить реальные ID перед запуском -->
+<!--
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(YY_COUNTER_ID, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/YY_COUNTER_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="../index.html" class="logo">RUSHAN<span>MANS</span></a>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Главная</a></li>
+      <li><a href="../about.html">Обо мне</a></li>
+      <li><a href="../blog.html">Блог</a></li>
+      <li><a href="../portfolio.html">Портфолио</a></li>
+      <li><a href="../contact.html">Контакты</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <div class="article-header">
+    <span class="tag">Алгоритмы</span>
+    <h1>Алгоритм Дейкстры на пальцах</h1>
+    <div class="meta">9 мин чтения · Python, графы, heapq</div>
+  </div>
+
+  <article class="content">
+    <p>Алгоритм Дейкстры находит кратчайшее расстояние от одной вершины графа до всех остальных, если все веса рёбер неотрицательные. Классический пример применения — построение маршрутов на карте.</p>
+
+    <h2>Идея</h2>
+    <p>Держим для каждой вершины текущую лучшую известную оценку расстояния от старта. На каждом шаге берём ещё не обработанную вершину с наименьшей оценкой, «фиксируем» её и пробуем через неё улучшить оценки соседей. Так постепенно расстояния становятся окончательными.</p>
+
+    <div class="callout">
+      Ключевой момент: если веса могут быть отрицательными, алгоритм Дейкстры перестаёт гарантировать правильный ответ — для таких случаев нужен алгоритм Беллмана — Форда.
+    </div>
+
+    <h2>Реализация на Python</h2>
+    <p>Для эффективного выбора вершины с минимальной оценкой используем кучу (<code>heapq</code>) — она даёт следующий минимум за <code>O(log n)</code>.</p>
+    <pre><code>import heapq
+
+def dijkstra(graph: dict[str, list[tuple[str, int]]], start: str) -> dict[str, float]:
+    distances = {node: float("inf") for node in graph}
+    distances[start] = 0
+
+    queue = [(0, start)]
+    visited = set()
+
+    while queue:
+        current_distance, current_node = heapq.heappop(queue)
+
+        if current_node in visited:
+            continue
+        visited.add(current_node)
+
+        for neighbor, weight in graph[current_node]:
+            distance = current_distance + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(queue, (distance, neighbor))
+
+    return distances
+</code></pre>
+
+    <p>Пример графа и вызова:</p>
+    <pre><code>graph = {
+    "A": [("B", 4), ("C", 1)],
+    "B": [("A", 4), ("C", 2), ("D", 5)],
+    "C": [("A", 1), ("B", 2), ("D", 8)],
+    "D": [("B", 5), ("C", 8)],
+}
+
+print(dijkstra(graph, "A"))
+# {'A': 0, 'B': 3, 'C': 1, 'D': 8}
+</code></pre>
+
+    <h2>Почему B получает расстояние 3, а не 4</h2>
+    <p>Прямое ребро A → B стоит 4, но есть путь A → C → B ценой 1 + 2 = 3, который дешевле. Алгоритм находит его, потому что после обработки вершины C он пересчитывает оценку для B и видит более короткий путь.</p>
+
+    <h2>Сложность</h2>
+    <ul>
+      <li>С кучей: <code>O((V + E) log V)</code>, где V — число вершин, E — число рёбер.</li>
+      <li>Без кучи (наивный перебор минимума): <code>O(V²)</code> — выгоднее только на очень плотных графах.</li>
+    </ul>
+
+    <h2>Типичные ошибки</h2>
+    <ul>
+      <li>Забыть пропускать уже посещённые вершины — тогда одна и та же вершина обрабатывается много раз.</li>
+      <li>Использовать алгоритм на графе с отрицательными весами — результат будет неверным без явной ошибки.</li>
+      <li>Хранить в очереди только вершину без расстояния — тогда куча не сможет упорядочить элементы правильно.</li>
+    </ul>
+
+    <a class="back-link" href="../blog.html">← Ко всем статьям</a>
+  </article>
+
+</main>
+
+<footer class="site-footer wrap">
+  <span>© 2026 Rushanmans</span>
+  <span><a href="../contact.html">Связаться со мной</a></span>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
