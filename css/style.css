@@ -16,7 +16,15 @@
   --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.5);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --max-width: 1120px;
+  /* Фон по умолчанию для всех страниц. Переопределяется классом на
+     <body> конкретной страницы — см. .bg-none и .bg-* ниже. */
+  --bg-image: url("../assets/bg-main.jpg");
 }
+
+/* Переопределения фона по классу на <body>: <body class="bg-none">
+   совсем без фото, или заведи свой класс по образцу — например
+   .bg-about { --bg-image: url("../assets/bg-about.jpg"); } */
+body.bg-none { --bg-image: none; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -43,7 +51,7 @@ body::before {
     radial-gradient(circle at 12% 18%, rgba(139, 147, 255, 0.30), transparent 42%),
     radial-gradient(circle at 88% 8%, rgba(52, 209, 194, 0.20), transparent 40%),
     radial-gradient(circle at 50% 95%, rgba(139, 90, 255, 0.22), transparent 45%),
-    var(--bg-base) url("../assets/bg-main.jpg") center / cover no-repeat fixed;
+    var(--bg-base) var(--bg-image) center / cover no-repeat fixed;
   background-blend-mode: screen, screen, screen, normal;
 }
 /* Darkening veil so text + glass stay legible over any photo */
