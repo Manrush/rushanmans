@@ -272,7 +272,7 @@ section { padding: 56px 0; }
 }
 
 .card h3 { margin: 0; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
-.card p { margin: 0; color: var(--text-dim); font-weight: 300; font-size: 0.95rem; }
+.card p { margin: 0; color: var(--text-dim); font-weight: 300; font-size: 0.95rem; overflow-wrap: break-word; }
 .card .meta { font-size: 0.78rem; color: var(--text-faint); margin-top: auto; letter-spacing: 0.02em; }
 
 .card .stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
@@ -352,7 +352,7 @@ pre {
   line-height: 1.55;
   border: 1px solid var(--glass-border);
 }
-code { font-family: "Cascadia Code", "Fira Code", Consolas, Menlo, monospace; }
+code { font-family: "Cascadia Code", "Fira Code", Consolas, Menlo, monospace; overflow-wrap: break-word; }
 p code, li code {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--glass-border);
