@@ -71,7 +71,7 @@
             <textarea id="message" name="message" required></textarea>
           </div>
           <button type="submit" class="btn">Отправить</button>
-          <p id="form-note" class="meta" style="display:none;">Спасибо! Это демо-форма без сервера, сообщение никуда не отправилось — напишите мне напрямую на почту.</p>
+          <p id="form-note" class="meta" style="display:none;"></p>
         </form>
       </div>
       <div>
@@ -94,10 +94,28 @@
 
 <script src="js/main.js"></script>
 <script>
+  // URL веб-приложения Apps Script (Развернуть → Веб-приложение), оканчивается на /exec
+  var GAS_URL = "https://script.google.com/macros/s/AKfycbyxHpLsNrOroiOpkucp_x7esAf7Oe8Oct006-EQsGY_yxr_P7rmIfX5Nk1b3nMnQx7PJA/exec";
+
   document.getElementById("contact-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    document.getElementById("form-note").style.display = "block";
-    this.reset();
+    var form = this;
+    var note = document.getElementById("form-note");
+
+    fetch(GAS_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: new FormData(form),
+    })
+      .then(function () {
+        note.textContent = "Спасибо! Заявка отправлена.";
+        note.style.display = "block";
+        form.reset();
+      })
+      .catch(function () {
+        note.textContent = "Не получилось отправить — напишите напрямую на почту.";
+        note.style.display = "block";
+      });
   });
 </script>
 </body>
