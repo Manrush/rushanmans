@@ -233,6 +233,54 @@ section { padding: 56px 0; }
 .section-title a:hover { color: var(--accent); }
 
 /* ===========================================================
+   Blog controls — search + tag filter
+   =========================================================== */
+.blog-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 420px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.search-input::placeholder { color: var(--text-faint); }
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--glass-strong);
+}
+
+.tag-filter { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.tag-chip {
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.tag-chip:hover { color: var(--text); }
+.tag-chip.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0a0b12;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.card[hidden] { display: none; }
+
+/* ===========================================================
    Cards
    =========================================================== */
 .grid {

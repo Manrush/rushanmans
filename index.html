@@ -69,24 +69,26 @@
       <a href="blog.html">Все статьи →</a>
     </div>
     <div class="card-stack">
-      <div class="card">
-        <span class="tag">Парсинг</span>
-        <h3><a href="articles/parsing-internships.html">Парсер вакансий стажировок на Python</a></h3>
-        <p>Собираем список стажировок с сайта вакансий: requests + BeautifulSoup, сохранение в CSV и немного pandas для анализа.</p>
-        <div class="meta">12 мин чтения</div>
-      </div>
-      <div class="card">
+<!-- ARTICLES:STACK:START -->
+      <div class="card" data-tags="python алгоритмы графы heapq">
         <span class="tag">Алгоритмы</span>
         <h3><a href="articles/dijkstra-explained.html">Алгоритм Дейкстры на пальцах</a></h3>
-        <p>Разбор задачи поиска кратчайшего пути во взвешенном графе: идея, реализация на Python, сложность и типичные ошибки.</p>
+        <p>Разбор алгоритма Дейкстры: идея, реализация на Python, сложность.</p>
         <div class="meta">9 мин чтения</div>
       </div>
-      <div class="card">
+      <div class="card" data-tags="python парсинг beautifulsoup pandas">
+        <span class="tag">Парсинг</span>
+        <h3><a href="articles/parsing-internships.html">Парсер вакансий стажировок на Python</a></h3>
+        <p>Разбор кода парсера стажировок: requests, BeautifulSoup, pandas.</p>
+        <div class="meta">12 мин чтения</div>
+      </div>
+      <div class="card" data-tags="sql orm django базы данных">
         <span class="tag">Базы данных</span>
         <h3><a href="articles/sql-n-plus-one.html">Проблема N+1 запросов и как её лечить</a></h3>
-        <p>Почему ORM незаметно генерирует сотни лишних SQL-запросов и как это увидеть и исправить с помощью eager loading.</p>
+        <p>Разбор проблемы N+1 в ORM и способов её решения.</p>
         <div class="meta">7 мин чтения</div>
       </div>
+      <!-- ARTICLES:STACK:END -->
     </div>
   </section>
 

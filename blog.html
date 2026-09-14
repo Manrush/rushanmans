@@ -55,26 +55,36 @@
   </section>
 
   <section>
-    <div class="grid">
-      <div class="card">
-        <span class="tag">Парсинг</span>
-        <h3><a href="articles/parsing-internships.html">Парсер вакансий стажировок на Python</a></h3>
-        <p>Собираем список стажировок с сайта вакансий: requests + BeautifulSoup, сохранение в CSV и немного pandas для анализа.</p>
-        <div class="meta">12 мин чтения</div>
-      </div>
-      <div class="card">
-        <span class="tag">Алгоритмы</span>
-        <h3><a href="articles/dijkstra-explained.html">Алгоритм Дейкстры на пальцах</a></h3>
-        <p>Разбор задачи поиска кратчайшего пути во взвешенном графе: идея, реализация на Python, сложность и типичные ошибки.</p>
-        <div class="meta">9 мин чтения</div>
-      </div>
-      <div class="card">
-        <span class="tag">Базы данных</span>
-        <h3><a href="articles/sql-n-plus-one.html">Проблема N+1 запросов и как её лечить</a></h3>
-        <p>Почему ORM незаметно генерирует сотни лишних SQL-запросов и как это увидеть и исправить с помощью eager loading.</p>
-        <div class="meta">7 мин чтения</div>
+    <div class="blog-controls">
+      <input type="search" id="article-search" class="search-input" placeholder="Поиск по статьям…">
+      <div class="tag-filter" id="tag-filter">
+        <button type="button" class="chip tag-chip active" data-tag="">Все</button>
       </div>
     </div>
+
+    <div class="grid" id="articles-grid">
+<!-- ARTICLES:GRID:START -->
+      <div class="card" data-tags="python алгоритмы графы heapq">
+        <span class="tag">Алгоритмы</span>
+        <h3><a href="articles/dijkstra-explained.html">Алгоритм Дейкстры на пальцах</a></h3>
+        <p>Разбор алгоритма Дейкстры: идея, реализация на Python, сложность.</p>
+        <div class="meta">9 мин чтения</div>
+      </div>
+      <div class="card" data-tags="python парсинг beautifulsoup pandas">
+        <span class="tag">Парсинг</span>
+        <h3><a href="articles/parsing-internships.html">Парсер вакансий стажировок на Python</a></h3>
+        <p>Разбор кода парсера стажировок: requests, BeautifulSoup, pandas.</p>
+        <div class="meta">12 мин чтения</div>
+      </div>
+      <div class="card" data-tags="sql orm django базы данных">
+        <span class="tag">Базы данных</span>
+        <h3><a href="articles/sql-n-plus-one.html">Проблема N+1 запросов и как её лечить</a></h3>
+        <p>Разбор проблемы N+1 в ORM и способов её решения.</p>
+        <div class="meta">7 мин чтения</div>
+      </div>
+      <!-- ARTICLES:GRID:END -->
+    </div>
+    <p id="no-results" class="meta" hidden>Ничего не найдено — попробуй другой запрос или тег.</p>
   </section>
 
 </main>
