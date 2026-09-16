@@ -109,7 +109,7 @@ def build_article(md_path, template):
 def render_card(article):
     tags_attr = " ".join(article["tags"])
     return (
-        f'      <div class="card" data-tags="{tags_attr}">\n'
+        f'      <div class="card" data-tags="{tags_attr}" data-block="{article["slug"]}">\n'
         f'        <span class="tag">{article["tag"]}</span>\n'
         f'        <h3><a href="articles/{article["slug"]}.html">{article["title"]}</a></h3>\n'
         f'        <p>{article["description"]}</p>\n'

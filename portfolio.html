@@ -30,6 +30,38 @@
   gtag('config', 'G-XXXXXXXXXX');
 </script>
 -->
+
+<!-- Top100 (Kraken) Counter -->
+<script>
+    (function (w, d, c) {
+    (w[c] = w[c] || []).push(function() {
+        var options = {
+            project: 7752520,
+            attributes_dataset: [ "data-block" ],
+            user_id: null,
+        };
+        try {
+            w.top100Counter = new top100(options);
+        } catch(e) { }
+    });
+    var n = d.getElementsByTagName("script")[0],
+    s = d.createElement("script"),
+    f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src =
+    (d.location.protocol == "https:" ? "https:" : "http:") +
+    "//st.top100.ru/top100/top100.js";
+
+    if (w.opera == "[object Opera]") {
+    d.addEventListener("DOMContentLoaded", f, false);
+} else { f(); }
+})(window, document, "_top100q");
+</script>
+<noscript>
+  <img src="//counter.rambler.ru/top100.cnt?pid=7752520" alt="Топ-100" />
+</noscript>
+<!-- END Top100 (Kraken) Counter -->
 </head>
 <body>
 <!--LiveInternet counter--><script>new Image().src = "https://counter.yadro.ru/hit?r"+escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";h"+escape(document.title.substring(0,150))+";"+Math.random();</script><!--/LiveInternet-->
@@ -38,12 +70,12 @@
   <nav class="nav wrap">
     <a href="index.html" class="logo">RUSHAN<span>MANS</span></a>
     <button class="nav-toggle" aria-label="Меню">☰</button>
-    <ul class="nav-links">
-      <li><a href="index.html">Главная</a></li>
-      <li><a href="about.html">Обо мне</a></li>
-      <li><a href="blog.html">Блог</a></li>
-      <li><a href="portfolio.html">Портфолио</a></li>
-      <li><a href="contact.html">Контакты</a></li>
+    <ul class="nav-links" data-block="nav">
+      <li><a href="index.html" data-block="главная">Главная</a></li>
+      <li><a href="about.html" data-block="обо-мне">Обо мне</a></li>
+      <li><a href="blog.html" data-block="блог">Блог</a></li>
+      <li><a href="portfolio.html" data-block="портфолио">Портфолио</a></li>
+      <li><a href="contact.html" data-block="контакты">Контакты</a></li>
     </ul>
   </nav>
 </header>
@@ -56,9 +88,9 @@
   </section>
 
   <section>
-    <div class="grid">
+    <div class="grid" data-block="portfolio">
 
-      <div class="card">
+      <div class="card" data-block="parser-stazhirovok">
         <span class="tag">Python · Парсинг</span>
         <h3>Парсер стажировок</h3>
         <p>Скрипт собирает объявления о стажировках с job-сайта: запросы с задержкой, разбор HTML через BeautifulSoup, очистка данных и экспорт в CSV. Разбор кода — в статье
@@ -68,7 +100,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-block="dijkstra-viz">
         <span class="tag">Алгоритмы</span>
         <h3>Визуализация алгоритма Дейкстры</h3>
         <p>Консольная реализация поиска кратчайшего пути во взвешенном графе с пошаговым выводом состояния очереди с приоритетом. Полный разбор — в статье
@@ -78,7 +110,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-block="etot-sayt">
         <span class="tag">HTML/CSS/JS</span>
         <h3>Этот сайт-портфолио</h3>
         <p>Многостраничный статический сайт: блог, портфолио, контакты — сделан как лабораторная работа по веб-аналитике, с подключением счётчиков посещаемости.</p>
@@ -87,7 +119,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-block="treker-zadach">
         <span class="tag">JavaScript</span>
         <h3>Трекер задач</h3>
         <p>Небольшое SPA для списка дел: добавление, отметка выполненных, фильтр по статусу, сохранение состояния в localStorage без бэкенда.</p>
@@ -96,7 +128,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-block="n-plus-one">
         <span class="tag">SQL</span>
         <h3>Разбор проблемы N+1</h3>
         <p>Мини-пример на Django ORM, который показывает проблему N+1 запросов и её решение через <code>select_related</code>/<code>prefetch_related</code>. Подробнее — в статье

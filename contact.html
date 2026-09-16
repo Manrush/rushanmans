@@ -30,6 +30,38 @@
   gtag('config', 'G-XXXXXXXXXX');
 </script>
 -->
+
+<!-- Top100 (Kraken) Counter -->
+<script>
+    (function (w, d, c) {
+    (w[c] = w[c] || []).push(function() {
+        var options = {
+            project: 7752520,
+            attributes_dataset: [ "data-block" ],
+            user_id: null,
+        };
+        try {
+            w.top100Counter = new top100(options);
+        } catch(e) { }
+    });
+    var n = d.getElementsByTagName("script")[0],
+    s = d.createElement("script"),
+    f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src =
+    (d.location.protocol == "https:" ? "https:" : "http:") +
+    "//st.top100.ru/top100/top100.js";
+
+    if (w.opera == "[object Opera]") {
+    d.addEventListener("DOMContentLoaded", f, false);
+} else { f(); }
+})(window, document, "_top100q");
+</script>
+<noscript>
+  <img src="//counter.rambler.ru/top100.cnt?pid=7752520" alt="Топ-100" />
+</noscript>
+<!-- END Top100 (Kraken) Counter -->
 </head>
 <body>
 <!--LiveInternet counter--><script>new Image().src = "https://counter.yadro.ru/hit?r"+escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";h"+escape(document.title.substring(0,150))+";"+Math.random();</script><!--/LiveInternet-->
@@ -38,12 +70,12 @@
   <nav class="nav wrap">
     <a href="index.html" class="logo">RUSHAN<span>MANS</span></a>
     <button class="nav-toggle" aria-label="Меню">☰</button>
-    <ul class="nav-links">
-      <li><a href="index.html">Главная</a></li>
-      <li><a href="about.html">Обо мне</a></li>
-      <li><a href="blog.html">Блог</a></li>
-      <li><a href="portfolio.html">Портфолио</a></li>
-      <li><a href="contact.html">Контакты</a></li>
+    <ul class="nav-links" data-block="nav">
+      <li><a href="index.html" data-block="главная">Главная</a></li>
+      <li><a href="about.html" data-block="обо-мне">Обо мне</a></li>
+      <li><a href="blog.html" data-block="блог">Блог</a></li>
+      <li><a href="portfolio.html" data-block="портфолио">Портфолио</a></li>
+      <li><a href="contact.html" data-block="контакты">Контакты</a></li>
     </ul>
   </nav>
 </header>
@@ -58,7 +90,7 @@
   <section>
     <div class="contact-grid">
       <div>
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form" id="contact-form" data-block="contact-form">
           <div>
             <label for="name">Имя</label>
             <input type="text" id="name" name="name" required>
@@ -71,16 +103,16 @@
             <label for="message">Сообщение</label>
             <textarea id="message" name="message" required></textarea>
           </div>
-          <button type="submit" class="btn">Отправить</button>
+          <button type="submit" class="btn" data-block="submit">Отправить</button>
           <p id="form-note" class="meta" style="display:none;"></p>
         </form>
       </div>
       <div>
         <div class="section-title"><h2 style="font-size:1.2rem;">Другие способы связи</h2></div>
-        <ul class="social-list">
-          <li>📧 <a href="mailto:you@example.com">rushanmans@ya.com</a></li>
-          <li>💻 <a href="https://github.com/manrush">GitHub</a></li>
-          <li>💼 <a href="https://t.me/rushanmans">Telegram</a></li>
+        <ul class="social-list" data-block="social">
+          <li>📧 <a href="mailto:you@example.com" data-block="email">rushanmans@ya.com</a></li>
+          <li>💻 <a href="https://github.com/manrush" data-block="github">GitHub</a></li>
+          <li>💼 <a href="https://t.me/rushanmans" data-block="telegram">Telegram</a></li>
         </ul>
       </div>
     </div>
@@ -106,8 +138,15 @@
     var form = this;
     var note = document.getElementById("form-note");
 
+    var pseudoId = getPseudoId();
     var formData = new FormData(form);
-    formData.append("pseudo_id", getPseudoId());
+    formData.append("pseudo_id", pseudoId);
+
+    // Человек только что представился (имя/почта) — связываем это с его
+    // предыдущей анонимной историей в счётчике СберАдс.
+    if (window.top100Counter && typeof window.top100Counter.syncUserId === "function") {
+      window.top100Counter.syncUserId(pseudoId);
+    }
 
     fetch(GAS_URL, {
       method: "POST",
