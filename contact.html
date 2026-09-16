@@ -106,10 +106,13 @@
     var form = this;
     var note = document.getElementById("form-note");
 
+    var formData = new FormData(form);
+    formData.append("pseudo_id", getPseudoId());
+
     fetch(GAS_URL, {
       method: "POST",
       mode: "no-cors",
-      body: new FormData(form),
+      body: formData,
     })
       .then(function () {
         note.textContent = "Спасибо! Заявка отправлена.";

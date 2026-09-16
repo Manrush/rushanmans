@@ -1,3 +1,22 @@
+// Постоянный анонимный ID посетителя (хранится в localStorage браузера).
+// Используется, чтобы позже связать событие в рекламных счётчиках
+// (например, СберАдс) с конкретной заявкой в таблице.
+function getPseudoId() {
+  try {
+    var key = "rushanmans_uid";
+    var id = localStorage.getItem(key);
+    if (!id) {
+      id = (window.crypto && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
+      localStorage.setItem(key, id);
+    }
+    return id;
+  } catch (e) {
+    return "no-storage";
+  }
+}
+
 // Аналитика форм: шлёт цель в Метрику и событие в GA4, если счётчики подключены.
 // Пока реальных ID нет — просто пишет в консоль, чтобы было видно, что сработало бы.
 function trackEvent(name, params) {
