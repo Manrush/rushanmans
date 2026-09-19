@@ -1,72 +1,60 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rushanmans — портфолио и блог</title>
-<meta name="description" content="Rushanmans: статьи о коде и алгоритмах, портфолио проектов, парсинг данных.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rushanmans — портфолио и блог</title>
+    <meta name="description" content="Rushanmans: статьи о коде и алгоритмах, портфолио проектов, парсинг данных.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
-<!-- ===================================================================
-     Счётчики веб-аналитики (Яндекс.Метрика / Google Analytics 4)
-     Раскомментировать и подставить реальные ID после регистрации сайта:
-       - Яндекс.Метрика: https://metrika.yandex.ru  -> замените YY_COUNTER_ID
-       - GA4:            https://analytics.google.com -> замените G-XXXXXXXXXX
-     =================================================================== -->
-<!--
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-   ym(YY_COUNTER_ID, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/YY_COUNTER_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=112809770', 'ym');
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
--->
+        ym(112809770, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/112809770" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 
-<!-- Top100 (Kraken) Counter -->
-<script>
-    (function (w, d, c) {
-    (w[c] = w[c] || []).push(function() {
-        var options = {
-            project: 7752520,
-            attributes_dataset: [ "data-block" ],
-            user_id: null,
-        };
-        try {
-            w.top100Counter = new top100(options);
-        } catch(e) { }
-    });
-    var n = d.getElementsByTagName("script")[0],
-    s = d.createElement("script"),
-    f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src =
-    (d.location.protocol == "https:" ? "https:" : "http:") +
-    "//st.top100.ru/top100/top100.js";
+    <!-- Top100 (Kraken) Counter -->
+    <script>
+        (function (w, d, c) {
+            (w[c] = w[c] || []).push(function () {
+                var options = {
+                    project: 7752520,
+                    attributes_dataset: ["data-block"],
+                    user_id: null,
+                };
+                try {
+                    w.top100Counter = new top100(options);
+                } catch (e) { }
+            });
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src =
+                (d.location.protocol == "https:" ? "https:" : "http:") +
+                "//st.top100.ru/top100/top100.js";
 
-    if (w.opera == "[object Opera]") {
-    d.addEventListener("DOMContentLoaded", f, false);
-} else { f(); }
-})(window, document, "_top100q");
-</script>
-<noscript>
-  <img src="//counter.rambler.ru/top100.cnt?pid=7752520" alt="Топ-100" />
-</noscript>
-<!-- END Top100 (Kraken) Counter -->
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(window, document, "_top100q");
+    </script>
+    <noscript>
+        <img src="//counter.rambler.ru/top100.cnt?pid=7752520" alt="Топ-100" />
+    </noscript>
+    <!-- END Top100 (Kraken) Counter -->
 </head>
 <body>
 <!--LiveInternet counter--><script>new Image().src = "https://counter.yadro.ru/hit?r"+escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";h"+escape(document.title.substring(0,150))+";"+Math.random();</script><!--/LiveInternet-->
